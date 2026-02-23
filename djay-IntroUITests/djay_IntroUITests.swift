@@ -7,6 +7,19 @@
 
 import XCTest
 
+// Testing scenarios:
+// - iPhone SE, iPhone 16 Pro, iPhone 16 Pro Max
+// - orientations:
+//   - start in portrait
+//   - portrait to landscape
+//   - portrait to landscape and back
+//   - advance step
+//   - start in landscape
+//   - landscape to portrait
+//   - landscape to portrait and back to landscape
+//   - advance step
+
+
 final class djay_IntroUITests: XCTestCase {
 
     override func setUpWithError() throws {
