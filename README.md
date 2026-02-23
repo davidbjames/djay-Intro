@@ -32,6 +32,7 @@ Improvements I'd like to make:
 * Support for dark mode. I didn't do this since there were no designs to follow, and maybe doesn't make sense for this flow anyways.
 * Fine tune launch gradient image to match actual gradient layer. (it's actually pretty close right now and not noticeable)
 * iPad support, including split screen and slide over (see next)
+* Snapshot testing
 
 ### Caveats
 
