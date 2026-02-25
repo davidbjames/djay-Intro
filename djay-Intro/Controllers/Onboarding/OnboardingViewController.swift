@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 /// Holds the paging view controller, indicator and state for all onboarding screens
-final class OnboardingViewController: UIViewController {
+final class OnboardingViewController: UIViewController, SnapshotTestable {
     
     private let pagingViewController: OnboardingPagingViewController
     let pageControl: UIPageControl
@@ -18,12 +18,8 @@ final class OnboardingViewController: UIViewController {
     let onboardingState: CurrentValueSubject<OnboardingState, Never>
     private var subscriptions = [AnyCancellable]()
     
-    init(onboarding: Onboarding) {
-        // start on welcome page
-        // in this implementation we only store skill level and
-        // whether they have completed onboarding, not the actual
-        // page they were on when they left, since it's short
-        self.onboardingState = CurrentValueSubject(.init(step: .welcome, model: onboarding))
+    init(state: OnboardingState) {
+        self.onboardingState = CurrentValueSubject(state)
         self.pagingViewController = OnboardingPagingViewController(
             startViewController: .init(state: onboardingState)
         )
@@ -72,6 +68,19 @@ final class OnboardingViewController: UIViewController {
         ])
 
     }
+    
+    func setupPreTransitionState() -> Bool {
+        pagingViewController.setupPreTransitionState()
+    }
+    
+    func setupVisibleState() -> Bool {
+        pagingViewController.setupVisibleState()
+    }
+    
+    func setupPostTransitionState() -> Bool {
+        pagingViewController.setupPostTransitionState()
+    }
+    
     private func setupObservers() {
         
         // push the next onboarding step

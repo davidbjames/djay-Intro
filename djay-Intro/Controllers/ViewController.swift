@@ -9,9 +9,17 @@ import UIKit
 
 /// Main view controller. App enters here.
 class ViewController: UIViewController {
-
+    
+    /// `onboardingState` can be set for testing purposes,
+    /// but will usually be loaded from disk
+    var onboardingState: OnboardingState?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+
+    private func setupUI() {
         
         view.applyBackgroundGradient()
         
@@ -26,11 +34,18 @@ class ViewController: UIViewController {
     }
     
     private var isOnboardingRequired: Bool {
-        Onboarding.load()?.hasCompletedOnboarding != true
+        if let onboardingState {
+            !onboardingState.model.hasCompletedOnboarding
+        } else {
+            Onboarding.load()?.hasCompletedOnboarding != true
+        }
     }
     private func loadOnboardingFlow() {
         let onboardingViewController = OnboardingViewController(
-            onboarding: Onboarding.load() ?? .init()
+            state: onboardingState ?? .init(
+                step: .welcome,
+                model: Onboarding.load() ?? .init()
+            )
         )
         addChild(onboardingViewController)
         onboardingViewController.didMove(toParent: self)

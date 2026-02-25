@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		632F6E452F4D95A900CAFC49 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 632F6E442F4D95A900CAFC49 /* InlineSnapshotTesting */; };
+		632F6E472F4D95A900CAFC49 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 632F6E462F4D95A900CAFC49 /* SnapshotTesting */; };
+		632F6E492F4D95A900CAFC49 /* SnapshotTestingCustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 632F6E482F4D95A900CAFC49 /* SnapshotTestingCustomDump */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		63C850762F43386200320996 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -72,6 +78,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				632F6E492F4D95A900CAFC49 /* SnapshotTestingCustomDump in Frameworks */,
+				632F6E452F4D95A900CAFC49 /* InlineSnapshotTesting in Frameworks */,
+				632F6E472F4D95A900CAFC49 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +157,9 @@
 			);
 			name = "djay-IntroTests";
 			packageProductDependencies = (
+				632F6E442F4D95A900CAFC49 /* InlineSnapshotTesting */,
+				632F6E462F4D95A900CAFC49 /* SnapshotTesting */,
+				632F6E482F4D95A900CAFC49 /* SnapshotTestingCustomDump */,
 			);
 			productName = "djay-IntroTests";
 			productReference = 63C850752F43386200320996 /* djay-IntroTests.xctest */;
@@ -208,6 +220,9 @@
 			);
 			mainGroup = 63C850562F43386100320996;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				632F6E432F4D95A900CAFC49 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 63C850602F43386100320996 /* Products */;
 			projectDirPath = "";
@@ -294,7 +309,6 @@
 				INFOPLIST_FILE = "djay-Intro/Supporting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
@@ -327,7 +341,6 @@
 				INFOPLIST_FILE = "djay-Intro/Supporting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
@@ -595,6 +608,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		632F6E432F4D95A900CAFC49 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		632F6E442F4D95A900CAFC49 /* InlineSnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 632F6E432F4D95A900CAFC49 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = InlineSnapshotTesting;
+		};
+		632F6E462F4D95A900CAFC49 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 632F6E432F4D95A900CAFC49 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		632F6E482F4D95A900CAFC49 /* SnapshotTestingCustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 632F6E432F4D95A900CAFC49 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTestingCustomDump;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 63C850572F43386100320996 /* Project object */;
 }

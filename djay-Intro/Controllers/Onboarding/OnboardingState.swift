@@ -23,14 +23,14 @@ extension OnboardingStateful {
     }
 }
 
-enum OnboardingStep: Int {
+enum OnboardingStep: Int, CaseIterable {
     
     case welcome, overview, skillLevel, completion
     
     func createView(state: CurrentValueSubject<OnboardingState, Never>) -> (UIView & OnboardingStateful)? {
         switch self {
         case .welcome: WelcomeView(onboardingState: state)
-        case .overview: nil
+        case .overview: isTestingEnvironment() ? WelcomeView(onboardingState: state) : nil
         case .skillLevel: WelcomeSkillLevelView(onboardingState: state)
         case .completion: WelcomeCompletionView(onboardingState: state)
         }
@@ -71,7 +71,7 @@ enum OnboardingStep: Int {
 /// a combination of the current step, and any other
 /// data gathered during the onboarding.
 struct OnboardingState {
-    let step: OnboardingStep
+    var step: OnboardingStep
     var model: Onboarding
     
     /// Move to the next onboarding step with optional model

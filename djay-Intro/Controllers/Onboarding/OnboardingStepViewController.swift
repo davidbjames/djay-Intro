@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 /// Holds each of the onboarding steps / views
-final class OnboardingStepViewController: UIViewController, OnboardingStateful {
+final class OnboardingStepViewController: UIViewController, OnboardingStateful, SnapshotTestable {
     
     let onboardingState: CurrentValueSubject<OnboardingState, Never>
     

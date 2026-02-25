@@ -12,7 +12,7 @@ import UIKit
 // As a result of this, we must provide our own UIPageControl for the dots at the bottom.
 
 /// Manages pagination of the onboarding flow
-final class OnboardingPagingViewController: UIPageViewController {
+final class OnboardingPagingViewController: UIPageViewController, SnapshotTestable {
     
     var viewControllerCache: [OnboardingStepViewController] = []
     
@@ -79,5 +79,17 @@ final class OnboardingPagingViewController: UIPageViewController {
             animated: usesPageAnimation
         )
         nextStepViewController.updateOnboarding()
+    }
+    
+    func setupPreTransitionState() -> Bool {
+        currentStepViewController?.setupPreTransitionState() ?? false
+    }
+    
+    func setupVisibleState() -> Bool {
+        currentStepViewController?.setupVisibleState() ?? false
+    }
+    
+    func setupPostTransitionState() -> Bool {
+        currentStepViewController?.setupPostTransitionState() ?? false 
     }
 }

@@ -14,7 +14,7 @@ import Combine
 /// to the `OnboardingStep` states of `welcome` and `overview`.
 /// They are combined in one view to support transition animation.
 /// (other step views are separated using page transitions)
-final class WelcomeView: WelcomeBaseView {
+final class WelcomeView: WelcomeBaseView, SnapshotTestable {
     
     private var introWords: UILabel!
     private var stackView: UIStackView!
@@ -87,8 +87,6 @@ final class WelcomeView: WelcomeBaseView {
             image: heroImage.withAlignmentRectInsets(.init(top: 10.0, left: 0.0, bottom: 30.0, right: 0.0))
         )
         heroPic.transform = .init(scaleX: 0.0, y: 0.0)
-        heroPic.isHidden = true
-        heroPic.alpha = 0.0
         heroPic.setContentCompressionResistancePriority(.required, for: .horizontal)
         stackView.addArrangedSubview(heroPic)
         
@@ -102,21 +100,60 @@ final class WelcomeView: WelcomeBaseView {
         welcomeText.textColor = .white
         welcomeText.textAlignment = .center
         welcomeText.numberOfLines = 0
-        welcomeText.transform = .init(scaleX: 0.0, y: 0.0)
-        welcomeText.isHidden = true
-        welcomeText.alpha = 0.0
         stackView.addArrangedSubview(welcomeText)
 
         ada = UIImageView(image: adaImage)
-        ada.transform = .init(scaleX: 0.0, y: 0.0)
-        ada.isHidden = true
-        ada.alpha = 0.0
         ada.setContentCompressionResistancePriority(.required, for: .horizontal)
         stackView.addArrangedSubview(ada)
+        
+        setupPreTransitionState()
         
         // Update constraints for current orientation (call this last)
         
         updateViewForTraits()
+    }
+    
+    @discardableResult
+    func setupPreTransitionState() -> Bool {
+        
+        heroPic.isHidden = true
+        heroPic.alpha = 0.0
+        
+        welcomeText.transform = .init(scaleX: 0.0, y: 0.0)
+        welcomeText.isHidden = true
+        welcomeText.alpha = 0.0
+        
+        ada.transform = .init(scaleX: 0.0, y: 0.0)
+        ada.isHidden = true
+        ada.alpha = 0.0
+        
+        return true
+    }
+    
+    @discardableResult
+    func setupVisibleState() -> Bool {
+        heroPic.isHidden = false
+        welcomeText.isHidden = false
+        // for this exercise I hide the ADA in landscape..
+        ada.isHidden = isCompactVerticalSize || isVerySmallScreen
+        
+        return onboardingStep == .overview
+    }
+    
+    @discardableResult
+    func setupPostTransitionState() -> Bool {
+        
+        // bring in the images
+        heroPic.transform = .identity
+        heroPic.alpha = 1.0
+        welcomeText.transform = .identity
+        welcomeText.alpha = 1.0
+        ada.transform = .identity
+        ada.alpha = 1.0
+        // hide the intro words
+        introWordsBottomConstraint.constant = 50
+        
+        return onboardingStep == .overview
     }
     
     private var didLayoutSubviews = false
@@ -143,23 +180,12 @@ final class WelcomeView: WelcomeBaseView {
         case .welcome:
             break
         case .overview:
-            heroPic.isHidden = false
-            welcomeText.isHidden = false
-            // for this exercise I hide the ADA in landscape..
-            ada.isHidden = isCompactVerticalSize || isVerySmallScreen
+            setupVisibleState()
             UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseOut) { [weak self] in
                 guard let self else {
                     return
                 }
-                // bring in the images
-                heroPic.transform = .identity
-                heroPic.alpha = 1.0
-                welcomeText.transform = .identity
-                welcomeText.alpha = 1.0
-                ada.transform = .identity
-                ada.alpha = 1.0
-                // hide the intro words
-                introWordsBottomConstraint.constant = 50
+                setupPostTransitionState()
                 layoutIfNeeded() // needed for the constraint change
             } completion: { [weak self] finished in
                 if let self, finished {
@@ -209,5 +235,6 @@ final class WelcomeView: WelcomeBaseView {
             stackView.axis = .vertical
         }
     }
+    
 }
 

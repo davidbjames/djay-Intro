@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 /// The third onboarding step view.
-final class WelcomeSkillLevelView: WelcomeBaseView {
+final class WelcomeSkillLevelView: WelcomeBaseView, SnapshotTestable {
     
     private var stackView: UIStackView!
     private var headerStack: UIStackView!
@@ -176,6 +176,8 @@ final class WelcomeSkillLevelView: WelcomeBaseView {
 
             selectionButtons.append(skillLevelButton)
         }
+        
+        setupPreTransitionState()
         
         updateViewForTraits()
     }
