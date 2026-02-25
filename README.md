@@ -32,9 +32,13 @@ Improvements I'd like to make:
 * Support for dark mode. I didn't do this since there were no designs to follow, and maybe doesn't make sense for this flow anyways.
 * Fine tune launch gradient image to match actual gradient layer. (it's actually pretty close right now and not noticeable)
 * iPad support, including split screen and slide over (see next)
-* Snapshot testing
+* ~~Snapshot testing~~ (see update below)
 
 ### Caveats
 
 * Some content is hidden to accomodate landscape and smaller screen sizes
 * Used `UIView` methods I created: `isVerySmallScreen` and `isCompactVerticalSize` -- Since this is an iPhone only exercise, I took the liberty of checking for very small screens (like iPhone SE) and for landscape orientation, in order to have more precise control of layouts. Obviously, this doesn't work for iPad split screen.
+
+### Update
+
+* Added initial support for snapshot testing the first 3 screens of the onboarding. Video here: https://share.zight.com/2NuO1PYk
